@@ -12,10 +12,10 @@ class MovieCollection{
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT posterId,originalLanguage,originalTitle,overwiew,releaseDate,runtime,tagline,title
-            FROM Movie
+            SELECT posterId,originalLanguage,originalTitle,overview,releaseDate,runtime,tagline,title,id
+            FROM movie
             WHERE id IS NOT NULL
-            ORDER BY name ASC
+            ORDER BY title ASC
 SQL
         );
         $stmt->execute();

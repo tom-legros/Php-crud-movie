@@ -9,15 +9,14 @@ use Database\MyPdo;
 
 class Movie
 {
-    private ?int $MovieId;
+    private int $id;
     private int $posterId;
     private string $originalLanguage;
-
-    private string $originalTitle;
-    private string $overwiew;
-    private \DateTime $releaseDate;
+    private ?string $originalTitle;
+    private string $overview;
+    private string $releaseDate;
     private  int $runtime;
-    private string $tagline;
+    private ?string $tagline;
     private string $title;
 
 
@@ -54,22 +53,22 @@ class Movie
         $this->originalTitle = $originalTitle;
     }
 
-    public function getOverwiew(): string
+    public function getOverview(): string
     {
-        return $this->overwiew;
+        return $this->overview;
     }
 
-    public function setOverwiew(string $overwiew): void
+    public function setOverview(string $overview): void
     {
-        $this->overwiew = $overwiew;
+        $this->overview = $overview;
     }
 
-    public function getReleaseDate(): \DateTime
+    public function getReleaseDate(): string
     {
         return $this->releaseDate;
     }
 
-    public function setReleaseDate(\DateTime $releaseDate): void
+    public function setReleaseDate(string $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }
@@ -104,14 +103,14 @@ class Movie
         $this->title = $title;
     }
 
-    public function getMovieId(): ?int
+    public function getId(): ?int
     {
-        return $this->MovieId;
+        return $this->id;
     }
 
-    public function setMovieId(?int $MovieId): void
+    public function setMovieId(?int $id): void
     {
-        $this->MovieId = $MovieId;
+        $this->id = $id;
     }
 
 }
