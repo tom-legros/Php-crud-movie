@@ -9,7 +9,7 @@ use Database\MyPdo;
 
 class Movie
 {
-    private ?int $id;
+    private ?int $MovieId;
     private int $posterId;
     private string $originalLanguage;
 
@@ -22,6 +22,7 @@ class Movie
 
 
     private function __construct() {}
+
 
     public function getOriginalLanguage(): string
     {
@@ -101,6 +102,16 @@ class Movie
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getMovieId(): ?int
+    {
+        return $this->MovieId;
+    }
+
+    public function setMovieId(?int $MovieId): void
+    {
+        $this->MovieId = $MovieId;
     }
 
 }
