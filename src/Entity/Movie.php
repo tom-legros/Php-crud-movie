@@ -7,18 +7,101 @@ namespace Entity;
 
 use Database\MyPdo;
 
-class F
+class Movie
 {
     private ?int $id;
-    private string $name;
+    private int $posterId;
+    private string $originalLanguage;
+
+    private string $originalTitle;
+    private string $overwiew;
+    private \DateTime $releaseDate;
+    private  int $runtime;
+    private string $tagline;
+    private string $title;
+
 
     private function __construct() {}
 
-    public static function create(string $name, ?int $id = null): static
+    public function getOriginalLanguage(): string
     {
-        $artist = new self();
-        $artist->setId($id);
-        $artist->setName($name);
-
-        return $artist;
+        return $this->originalLanguage;
     }
+
+    public function setOriginalLanguage(string $originalLanguage): void
+    {
+        $this->originalLanguage = $originalLanguage;
+    }
+
+    public function getPosterId(): ?int
+    {
+        return $this->posterId;
+    }
+
+    public function setPosterId(?int $posterId): void
+    {
+        $this->posterId = $posterId;
+    }
+
+    public function getOriginalTitle(): string
+    {
+        return $this->originalTitle;
+    }
+
+    public function setOriginalTitle(string $originalTitle): void
+    {
+        $this->originalTitle = $originalTitle;
+    }
+
+    public function getOverwiew(): string
+    {
+        return $this->overwiew;
+    }
+
+    public function setOverwiew(string $overwiew): void
+    {
+        $this->overwiew = $overwiew;
+    }
+
+    public function getReleaseDate(): \DateTime
+    {
+        return $this->releaseDate;
+    }
+
+    public function setReleaseDate(\DateTime $releaseDate): void
+    {
+        $this->releaseDate = $releaseDate;
+    }
+
+    public function getRuntime(): int
+    {
+        return $this->runtime;
+    }
+
+    public function setRuntime(int $runtime): void
+    {
+        $this->runtime = $runtime;
+    }
+
+    public function getTagline(): string
+    {
+        return $this->tagline;
+    }
+
+    public function setTagline(string $tagline): void
+    {
+        $this->tagline = $tagline;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+}
+
