@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Entity\People;
+use Entity\Collection\PeopleCollection;
 use Html\AppWebPage;
 
 
@@ -14,7 +16,7 @@ $content = <<<HTML
 </div>
 
 <div class="filmography">
-    <a href="movie.php?filmId=X">
+    <a href="movie.php?id=X">
         <img src="poster">
         <span>Titre</span>
         <span>Date</span>
