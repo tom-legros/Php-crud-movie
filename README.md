@@ -6,6 +6,13 @@
 - Theo Bordier : theo.bordier@etudiant.univ-reims.fr
 
 ## Installation / Configuration
+## Serveur Web local
+
+Lancer le serveur Web local PHP à la racine du projet grâce à composer :
+
+```bash
+composer start:linux
+```
 ## Style de codage
 
 Le projet utilise PHP CS Fixer avec la recommandation PSR-12.
