@@ -12,7 +12,7 @@ $Movies = (new MovieCollection())->findAll();
 
 $list = '';
 foreach ($Movies as $movie) {
-    $title = $webPage->$movie->getTitle();
+    $title = $movie->getTitle();
     $id = $movie->getId();
     $list .= "<p>{$id}{$title}</p>";
 }
