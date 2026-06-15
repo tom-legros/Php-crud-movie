@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Entity\Movie;
+use Entity\Image;
 use Entity\Collection\MovieCollection;
 use Html\AppWebPage;
 
@@ -13,8 +14,9 @@ $Movies = (new MovieCollection())->findAll();
 $list = '';
 foreach ($Movies as $movie) {
     $title = $movie->getTitle();
-    $id = $movie->getId();
-    $list .= "<p>{$id}{$title}</p>";
+    $poster = $movie->getPosterById($movie->getPosterID());
+    $decodePoster = base64_encode($poster->getJpeg());
+    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodePoster}>{$title}</p>";
 }
 $content = <<<HTML
 <div class="list">

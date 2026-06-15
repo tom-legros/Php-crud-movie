@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Image;
 
 class Movie
 {
@@ -112,6 +113,27 @@ class Movie
     {
         $this->id = $id;
     }
+    public function getPosterById(int $posterId): Image
+    {
+        {$stmt = MyPdo::getInstance()->prepare(
+                <<<'SQL'
+        SELECT id,jpeg
+        FROM image
+        WHERE id = :id
+        SQL
+            );
+            $stmt->execute([':id' => $posterId]);
 
+            $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            $poster = new image();
+            $poster->setImageId($ligne['id']);
+            $poster->setJpeg(($ligne['jpeg']));
+
+            return $poster;
+        }
+
+
+    }
 }
 
