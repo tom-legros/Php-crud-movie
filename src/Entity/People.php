@@ -6,7 +6,7 @@ namespace Entity;
 
 use Database\MyPdo;
 
-class Artist
+class People
 {
     private int $avatarId;
     private string $name;
@@ -76,6 +76,7 @@ class Artist
     {
         $this->biography = $biography;
     }
+
 
 
 }
