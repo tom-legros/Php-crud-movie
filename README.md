@@ -13,6 +13,18 @@ Lancer le serveur Web local PHP à la racine du projet grâce à composer :
 ```bash
 composer start:linux
 ```
+## Configuration de la base de données
+
+La connexion à la base de données est configurée via un fichier .mypdo.ini à placer à la racine du projet.
+
+Créer le fichier .mypdo.ini:
+
+```ini
+[mypdo]
+dsn = "mysql:host=legr0178;dbname=legr0178_movie;charset=utf8"
+username = login
+password = mdp
+```
 ## Style de codage
 
 Le projet utilise PHP CS Fixer avec la recommandation PSR-12.
