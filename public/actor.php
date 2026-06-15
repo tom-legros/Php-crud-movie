@@ -16,7 +16,7 @@ $content = <<<HTML
 </div>
 
 <div class="filmography">
-    <a href="movie.php?id=X">
+    <a href="index.php?id=X">
         <img src="poster">
         <span>Titre</span>
         <span>Date</span>
