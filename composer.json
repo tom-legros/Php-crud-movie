@@ -7,13 +7,13 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.95"
   },"scripts": {
-"test::cs": [
+"test:cs": [
 "php vendor/bin/php-cs-fixer fix --dry-run"
 ],
 "fix:cs" : [
 "php vendor/bin/php-cs-fixer fix"
 
 ],"test": [
-    "@test::cs"]
+    "@test:cs"]
 }
 }
