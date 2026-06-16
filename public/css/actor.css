@@ -60,3 +60,72 @@ body {
     flex: 1;
 }
 
+.actor-name,
+.actor-place,
+.actor-dates,
+.actor-biography {
+    border: 1px solid #666;
+    padding: 5px 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Liste des films */
+.cast-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #4a90d9;
+    padding: 10px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: black;
+    box-sizing: border-box;
+}
+
+.cast-card:hover {
+    background-color: #eef4ff;
+}
+
+.cast-avatar {
+    width: 80px;
+    height: 110px;
+    object-fit: cover;
+    border: 1px solid #666;
+    flex-shrink: 0;
+}
+
+.cast-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.cast-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.cast-title span,
+.cast-role {
+    border: 1px solid #666;
+    padding: 5px 8px;
+    display: block;
+    box-sizing: border-box;
+}
+
+.cast-title span:first-child {
+    flex: 1;
+}
+
+.cast-date {
+    white-space: nowrap;
+}
+
+.cast-role {
+    width: 100%;
+}

@@ -30,20 +30,20 @@ $Movies = $MovieCollection->findByIdAvatar($peopleId);
 $webPage = new WebPage();
 $webPage->setTitle("Films - {$people->getName()}");
 $webPage->appendCssUrl('/css/style.css');
-//$webPage->appendCssUrl('/css/actor.css');
+$webPage->appendCssUrl('/css/actor.css');
 
 $Actors = (new PeopleCollection())->findAll();
 
-$content .= '<a class="cast-card" href="/movie.php?movieId=' . $movie->getId() . '">';
-$content .= '<img class="cast-avatar" src="data:image/jpeg;base64,' . $decodePoster . '" alt="' . $movie->getTitle() . '">';
-$content .= '<div class="cast-info">';
-$content .= '<div class="cast-title">';
-$content .= '<span>' . $movie->getTitle() . '</span>';
-$content .= '<span class="cast-date">' . $movie->getReleaseDate() . '</span>';
-$content .= '</div>';
-$content .= '<span class="cast-role">' . $movie->getRole() . '</span>';  
-$content .= '</div>';
-$content .= '</a>';
+$content  = '<div class="header"><h1>'.$webPage->getTitle().'</h1></div>';
+$content .= '<div class="content">';
+$content .= '<div class="actor">';
+$content .= '<img class="actor-vignette" src="data:image/jpeg;base64,' . $decodeVignette . '" alt="' . $people->getName() . '">';
+$content .= '<div class="actor-info">';
+$content .= '<div class="actor-name">'.$people->getName().'</div>';
+$content .= '<div class="actor-place">'.$people->getPlaceOfBirth().'</div>';
+$content .= '<div class="actor-dates">'.$people->getBirthday().' - '.$people->getDeathday().'</div>';
+$content .= '<div class="actor-biography">'.$people->getBiography().'</div>';
+$content .= '</div></div>';
 
 foreach ($Movies as $movie) {
     $PosterMovie = $movie->getPosterById($movie->getPosterId());
@@ -52,7 +52,11 @@ foreach ($Movies as $movie) {
     $content .= '<a class="cast-card" href="/movie.php?movieId=' . $movie->getId() . '">';
     $content .= '<img class="cast-avatar" src="data:image/jpeg;base64,' . $decodePoster . '" alt="' . $movie->getTitle() . '">';
     $content .= '<div class="cast-info">';
-    $content .= '<span class="cast-role">' . $people->getRole() . '</span>';
+    $content .= '<div class="cast-title">';
+    $content .= '<span>' . $movie->getTitle() . '</span>';
+    $content .= '<span class="cast-date">' . $movie->getReleaseDate() . '</span>';
+    $content .= '</div>';
+    $content .= '<span class="cast-role">' . $movie->getRole() . '</span>';  // getRole() sur $movie, pas $people
     $content .= '</div>';
     $content .= '</a>';
 }
