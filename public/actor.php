@@ -49,7 +49,7 @@ foreach ($Movies as $movie) {
     $PosterMovie = $movie->getPosterById($movie->getPosterId());
     $decodePoster = base64_encode($PosterMovie->getJpeg());
 
-    $content .= '<a class="cast-card" href="/movie.php?peopleId=' . $movie->getId() . '">';
+    $content .= '<a class="cast-card" href="/movie.php?movieId=' . $movie->getId() . '">';
     $content .= '<img class="cast-avatar" src="data:image/jpeg;base64,' . $decodePoster . '" alt="' . $movie->getTitle() . '">';
     $content .= '<div class="cast-info">';
     $content .= '<span class="cast-role">' . $people->getRole() . '</span>';

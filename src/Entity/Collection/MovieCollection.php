@@ -28,7 +28,7 @@ SQL
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-        SELECT m.posterId,m.originalLanguage,m.originalTitle,m.overview,m.releaseDate,m.runtime,m.tagline,m.title,m.id
+        SELECT m.posterId,m.originalLanguage,m.originalTitle,m.overview,m.releaseDate,m.runtime,m.tagline,m.title,m.id,c.role
         FROM movie m 
         JOIN cast c ON c.movieId = m.id
         WHERE m.posterId IS NOT NULL
