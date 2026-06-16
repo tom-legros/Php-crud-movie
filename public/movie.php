@@ -33,7 +33,6 @@ $actors = $peopleCollection->findByIdMovie($movieId);
 $webPage = new WebPage();
 $webPage->setTitle("Films - {$movie->getTitle()}");
 $webPage->appendCssUrl('/css/style.css');
-$webPage->appendCssUrl('/css/movie.css');
 
 $escaper = new class { use StringEscaper; };
 

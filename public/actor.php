@@ -31,7 +31,6 @@ $Movies = $MovieCollection->findByIdAvatar($peopleId);
 $webPage = new WebPage();
 $webPage->setTitle("Films - {$people->getName()}");
 $webPage->appendCssUrl('/css/style.css');
-$webPage->appendCssUrl('/css/actor.css');
 
 $Actors = (new PeopleCollection())->findAll();
 
