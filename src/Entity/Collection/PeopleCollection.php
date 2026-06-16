@@ -24,7 +24,8 @@ SQL
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-        SELECT p.avatarId, p.name, p.birthday, p.deathday, p.biography, p.placeOfBirth, p.id
+        SELECT p.avatarId, p.name, p.birthday, p.deathday,
+               p.biography, p.placeOfBirth, p.id, c.role
         FROM people p
         JOIN cast c ON c.peopleId = p.id
         WHERE p.avatarId IS NOT NULL
@@ -34,6 +35,17 @@ SQL
         );
         $stmt->execute([':movieId' => $movieId]);
 
-        return $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, People::class);
+        $lignes = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $acteurs = [];
+
+        foreach ($lignes as $ligne) {
+            $people = People::findById($ligne['id']);
+            $people->setRole($ligne['role']);
+            $acteurs[] = $people;
+        }
+
+        return $acteurs;
     }
+
+
 }

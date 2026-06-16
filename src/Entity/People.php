@@ -127,18 +127,20 @@ class  People
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT avatarId, name, birthday, deathday, biography, placeOfBirth
-            FROM People
-            WHERE id = :id
-            SQL
+        SELECT avatarId, name, birthday, deathday, biography, placeOfBirth
+        FROM people
+        WHERE id = :id
+        SQL
         );
         $stmt->execute([':id' => $id]);
         $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
+
         if (false === $ligne) {
             throw new EntityNotFoundException(
-                sprintf("L'id n'as pas éte trouve", $id)
+                sprintf("L'id n'a pas été trouvé : %d", $id)
             );
         }
+
         $people = new self();
         $people->id = $id;
         $people->avatarId = $ligne['avatarId'];
