@@ -8,15 +8,18 @@ use Html\AppWebPage;
 
 
 $webPage = new AppWebPage('Film - Nom Acteur');
-foreach ($Actors as $actor) {
-    $name = $actor->getName();
-    $placeOfBirth = $actor->getPlaceOfBirth();
-    $birthday = $actor->getBirthday();
-    $deathday = $actor->getDeathday();
-    $biography = $actor->getBiography();
-    $poster = $actor->getPosterById($actor->getPosterID());
-    $decodePoster = base64_encode($poster->getJpeg());
-    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodePoster}\"><a href=\"https:http://localhost:8000/actor.php?avatarId={$id}\">{$title}</a></p>";
+
+$Actors = (new PeopleCollection())->findAll();
+
+foreach ($Actors as $people) {
+    $name = $people->getName();
+    $placeOfBirth = $people->getPlaceOfBirth();
+    $birthday = $people->getBirthday();
+    $deathday = $people->getDeathday();
+    $biography = $people->getBiography();
+    $vignette = $people->getVignetteById($people->getAvatarId());
+    $decodePoster = base64_encode($vignette->getJpeg());
+    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodeVignette}\"><a href=\"https:http://localhost:8000/actor.php?avatarId={$id}\">{$title}</a></p>";
 }
 $content = <<<HTML
 <div class="actor-info">

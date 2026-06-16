@@ -12,7 +12,7 @@ class PeopleCollection{
             <<<'SQL'
             SELECT avatarId,name,birthday,deathday,biography,placeOfBirth
             FROM people
-            WHERE id IS NOT NULL
+            WHERE avatarId IS NOT NULL
             ORDER BY name ASC
 SQL
         );
