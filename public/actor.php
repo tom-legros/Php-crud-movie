@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Entity\People;
 use Entity\Collection\PeopleCollection;
-use Html\AppWebPage;
+use Html\WebPage;
 
 if (!isset($_GET['peopleId']) || !ctype_digit($_GET['peopleId'])) {
     header('location: /');
@@ -37,7 +37,7 @@ $content .= '<img class="actor-vignette" src="data:image/jpeg;base64,' . $decode
 $content .= '<div class="actor-info">';
 $content .= '<div class="actor-name">'.$people->getName().'</div>';
 $content .= '<div class="actor-place">'.$people->getPlaceOfBirth().'</div>';
-$content .= '<div class="actor-dates">'.$people->getBirthday()->format('d/m/Y').' - '.$people->getDeathday()->format('d/m/Y').'</div>';
+$content .= '<div class="actor-dates">'.$people->getBirthday().' - '.$people->getDeathday().'</div>';
 $content .= '<div class="actor-biography">'.$people->getBiography().'</div>';
 $content .= '</div></div>';
 

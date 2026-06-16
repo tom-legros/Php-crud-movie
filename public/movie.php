@@ -54,7 +54,7 @@ foreach ($actors as $actor) {
     $actorAvatar = $actor->getAvatarById($actor->getAvatarId());
     $decodeAvatar = base64_encode($actorAvatar->getJpeg());
 
-    $content .= '<a class="cast-card" href="/people.php?peopleId=' . $actor->getId() . '">';
+    $content .= '<a class="cast-card" href="/actor.php?peopleId=' . $actor->getId() . '">';
     $content .= '<img class="cast-avatar" src="data:image/jpeg;base64,' . $decodeAvatar . '" alt="' . $actor->getName() . '">';
     $content .= '<div class="cast-info">';
     $content .= '<span class="cast-role">' . $actor->getRole() . '</span>';
