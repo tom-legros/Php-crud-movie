@@ -139,7 +139,7 @@ class Movie
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
             SELECT posterId,originalLanguage,originalTitle,overview,releaseDate,runtime,tagline,title,id
-            FROM Movie 
+            FROM movie 
             WHERE id = :id
             SQL
         );

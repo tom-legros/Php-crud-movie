@@ -21,7 +21,6 @@ try {
     $movie = Movie::findById($MovieId);
 } catch (EntityNotFoundException) {
     http_response_code(404);
-
     exit;
 }
 
