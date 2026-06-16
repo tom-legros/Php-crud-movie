@@ -10,7 +10,7 @@ class PeopleCollection{
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT avatarId,name,birthday,deathday,biography,placeOfBirth
+            SELECT avatarId,name,birthday,deathday,biography,placeOfBirth,id
             FROM people
             WHERE avatarId IS NOT NULL
             ORDER BY name ASC

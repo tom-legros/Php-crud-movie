@@ -9,8 +9,9 @@ use Entity\Image;
 use Entity\Exception\EntityNotFoundException;
 use Database\MyPdo;
 
-class People
+class  People
 {
+    private int $id;
     private ?int $avatarId;
     private ?string $name;
     private ?string $birthday;
@@ -77,11 +78,21 @@ class People
         return $this->biography;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function setBiography(?string $biography): void
     {
         $this->biography = $biography;
     }
-    public function getVignetteById(int $posterId): Image
+    public function getAvatarById(int $avatarId): Image
     {
         {$stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
@@ -90,22 +101,22 @@ class People
         WHERE id = :id
         SQL
         );
-            $stmt->execute([':id' => $posterId]);
+            $stmt->execute([':id' => $avatarId]);
 
             $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $poster = new image();
-            $poster->setImageId($ligne['id']);
-            $poster->setJpeg(($ligne['jpeg']));
+            $vignette = new image();
+            $vignette->setImageId($ligne['id']);
+            $vignette->setJpeg(($ligne['jpeg']));
 
-            return $poster;
+            return $vignette;
         }
     }
     public static function findById(int $id): self
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT id, avatarId, name, birthday, deathday, biography, placeOfBirth
+            SELECT avatarId, name, birthday, deathday, biography, placeOfBirth
             FROM People
             WHERE id = :id
             SQL
@@ -119,6 +130,7 @@ class People
         }
         $people = new self();
         $people->id = $ligne['id'];
+        $people->avatarId = $ligne['avatarId'];
         $people->name = $ligne['name'];
         $people->birthday = $ligne['birthday'];
         $people->deathday = $ligne['deathday'];
