@@ -114,7 +114,7 @@ class Movie
     {
         $this->id = $id;
     }
-    public function getPosterById(int $vignetteId): Image
+    public function getPosterById(int $PosterId): Image
     {
         {$stmt = MyPdo::getInstance()->prepare(
                 <<<'SQL'
@@ -123,15 +123,15 @@ class Movie
         WHERE id = :id
         SQL
             );
-            $stmt->execute([':id' => $vignetteId]);
+            $stmt->execute([':id' => $PosterId]);
 
             $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            $vignette = new image();
-            $vignette->setImageId($ligne['id']);
-            $vignette->setJpeg(($ligne['jpeg']));
+            $poster = new image();
+            $poster->setImageId($ligne['id']);
+            $poster->setJpeg(($ligne['jpeg']));
 
-            return $vignette;
+            return $poster;
         }
     }
         public static function findById(int $id): self
