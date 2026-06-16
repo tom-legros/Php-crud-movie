@@ -16,7 +16,7 @@ foreach ($Movies as $movie) {
     $title = $movie->getTitle();
     $poster = $movie->getPosterById($movie->getPosterID());
     $decodePoster = base64_encode($poster->getJpeg());
-    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodePoster}>{$title}</p>";
+    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodePoster}\">{$title}</p>";
 }
 $content = <<<HTML
 <div class="list">
