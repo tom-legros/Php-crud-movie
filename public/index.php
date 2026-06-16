@@ -13,16 +13,13 @@ $Movies = (new MovieCollection())->findAll();
 
 $list = '';
 foreach ($Movies as $movie) {
+    $id = $movie->getId();
     $title = $movie->getTitle();
     $poster = $movie->getPosterById($movie->getPosterID());
     $decodePoster = base64_encode($poster->getJpeg());
-    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodePoster}>{$title}</p>";
+    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodePoster}\"><a href=\"https:http://localhost:8000/movie.php?movieId={$id}\">{$title}</a></p>";
 }
-$content = <<<HTML
-<div class="list">
-{$list}
-</div>
-HTML;
+$content = $list;
 
 $webPage->setTitle("Films");
 $webPage->appendContent($content);
