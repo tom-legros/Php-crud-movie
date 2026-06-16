@@ -3,6 +3,7 @@
 namespace Entity\Collection;
 
 use Database\MyPdo;
+use Entity\Movie;
 use Entity\People;
 
 class PeopleCollection{
@@ -46,6 +47,5 @@ SQL
 
         return $acteurs;
     }
-
 
 }

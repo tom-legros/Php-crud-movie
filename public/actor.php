@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Entity\Collection\MovieCollection;
 use Entity\People;
 use Entity\Collection\PeopleCollection;
 use Html\WebPage;
@@ -23,6 +24,9 @@ try {
 $vignette = $people->getAvatarById($people->getAvatarId());
 $decodeVignette = base64_encode($vignette->getJpeg());
 
+$MovieCollection = new MovieCollection();
+$Movies = $MovieCollection->findByIdAvatar($peopleId);
+
 $webPage = new WebPage();
 $webPage->setTitle("Films - {$people->getName()}");
 $webPage->appendCssUrl('/css/style.css');
@@ -41,6 +45,16 @@ $content .= '<div class="actor-dates">'.$people->getBirthday().' - '.$people->ge
 $content .= '<div class="actor-biography">'.$people->getBiography().'</div>';
 $content .= '</div></div>';
 
+foreach ($Movies as $movie) {
+    $PosterMovie = $movie->getPosterById($movie->getPosterId());
+    $decodePoster = base64_encode($PosterMovie->getJpeg());
 
+    $content .= '<a class="cast-card" href="/movie.php?peopleId=' . $movie->getId() . '">';
+    $content .= '<img class="cast-avatar" src="data:image/jpeg;base64,' . $decodePoster . '" alt="' . $movie->getTitle() . '">';
+    $content .= '<div class="cast-info">';
+    $content .= '<span class="cast-role">' . $people->getRole() . '</span>';
+    $content .= '</div>';
+    $content .= '</a>';
+}
 $webPage->appendContent($content);
 echo $webPage->toHTML();
