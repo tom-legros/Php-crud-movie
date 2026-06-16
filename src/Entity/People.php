@@ -18,9 +18,20 @@ class  People
     private ?string $deathday;
     private ?string $biography;
     private ?string $placeOfBirth;
+    private ?string $role = null;
+
 
     private function __construct()
     {
+    }
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(?string $role): void
+    {
+        $this->role = $role;
     }
 
     public function getAvatarId(): ?int
@@ -129,7 +140,7 @@ class  People
             );
         }
         $people = new self();
-        $people->id = $ligne['id'];
+        $people->id = $id;
         $people->avatarId = $ligne['avatarId'];
         $people->name = $ligne['name'];
         $people->birthday = $ligne['birthday'];
