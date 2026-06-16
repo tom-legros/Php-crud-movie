@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace Entity;
 
 use Database\MyPdo;
+use Entity\Exception\EntityNotFoundException;
 use Entity\Image;
 
 class Movie
@@ -132,8 +133,36 @@ class Movie
 
             return $poster;
         }
+    }
+        public static function findById(int $id): self
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+            SELECT posterId,originalLanguage,originalTitle,overview,releaseDate,runtime,tagline,title,id
+            FROM Movie 
+            WHERE id = :id
+            SQL
+        );
+        $stmt->execute([':id' => $id]);
+        $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (false === $ligne) {
+            throw new EntityNotFoundException(
+                sprintf("L'id n'as pas éte trouve", $id)
+            );
+        }
+        $movie = new self();
+        $movie->id = $ligne['id'];
+        $movie->posterId = $ligne['posterId'];
+        $movie->originalLanguage = $ligne['originalLanguage'];
+        $movie->originalTitle = $ligne['originalTitle'];
+        $movie->overview = $ligne['overview'];
+        $movie->releaseDate = $ligne['releaseDate'];
+        $movie->runtime = $ligne['runtime'];
+        $movie-> tagline= $ligne['tagline'];
+        $movie-> title= $ligne['title'];
 
 
+        return $movie;
     }
 }
 
