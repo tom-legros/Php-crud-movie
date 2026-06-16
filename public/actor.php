@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Entity\Collection\MovieCollection;
+use Entity\Exception\EntityNotFoundException;
 use Entity\People;
 use Entity\Collection\PeopleCollection;
 use Html\WebPage;
@@ -34,7 +35,8 @@ $webPage->appendCssUrl('/css/actor.css');
 
 $Actors = (new PeopleCollection())->findAll();
 
-$content  = '<div class="header"><h1>'.$webPage->getTitle().'</h1></div>';
+$content  = '<a class="back-link" href="/">&#8592; Retour à l\'accueil</a>';
+$content .= '<div class="header"><h1>'.$webPage->getTitle().'</h1></div>';
 $content .= '<div class="content">';
 $content .= '<div class="actor">';
 $content .= '<img class="actor-vignette" src="data:image/jpeg;base64,' . $decodeVignette . '" alt="' . $people->getName() . '">';
@@ -56,7 +58,7 @@ foreach ($Movies as $movie) {
     $content .= '<span>' . $movie->getTitle() . '</span>';
     $content .= '<span class="cast-date">' . $movie->getReleaseDate() . '</span>';
     $content .= '</div>';
-    $content .= '<span class="cast-role">' . $movie->getRole() . '</span>';  // getRole() sur $movie, pas $people
+    $content .= '<span class="cast-role">' . $movie->getRole() . '</span>';
     $content .= '</div>';
     $content .= '</a>';
 }

@@ -37,7 +37,8 @@ $webPage->appendCssUrl('/css/movie.css');
 
 $escaper = new class { use StringEscaper; };
 
-$content  = '<div class="header"><h1>'.$webPage->getTitle().'</h1></div>';
+$content  = '<a class="back-link" href="/">&#8592; Retour à l\'accueil</a>';
+$content .= '<div class="header"><h1>'.$webPage->getTitle().'</h1></div>';
 $content .= '<div class="content">';
 $content .= '<div class="movie">';
 $content .= '<img class="movie-poster" src="data:image/jpeg;base64,'.$escaper->escapeString($decodePoster).'" alt="' . $escaper->escapeString($movie->getTitle()) . '">';
