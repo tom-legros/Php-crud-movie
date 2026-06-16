@@ -20,6 +20,17 @@ class Movie
     private  int $runtime;
     private ?string $tagline;
     private string $title;
+    private ?string $role = null;
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(?string $role): void
+    {
+        $this->role = $role;
+    }
 
 
     private function __construct() {}

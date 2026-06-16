@@ -1,0 +1,131 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header, .footer {
+    width: 100%;
+    max-width: 900px;
+    border: 2px solid #333;
+    margin-bottom: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.footer {
+    font-weight: bold;
+}
+
+/* Bloc infos acteur */
+.content {
+    width: 100%;
+    max-width: 900px;
+    border: 2px solid #333;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.actor {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
+    padding: 10px;
+}
+
+.actor-vignette {
+    width: 140px;
+    height: 180px;
+    object-fit: cover;
+    border: 1px solid #666;
+    flex-shrink: 0;
+}
+
+.actor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.actor-name,
+.actor-place,
+.actor-dates,
+.actor-biography {
+    border: 1px solid #666;
+    padding: 5px 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Liste des films */
+.cast-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    border: 2px solid #4a90d9;
+    padding: 10px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: black;
+    box-sizing: border-box;
+}
+
+.cast-card:hover {
+    background-color: #eef4ff;
+}
+
+.cast-avatar {
+    width: 80px;
+    height: 110px;
+    object-fit: cover;
+    border: 1px solid #666;
+    flex-shrink: 0;
+}
+
+.cast-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.cast-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.cast-title span,
+.cast-role {
+    border: 1px solid #666;
+    padding: 5px 8px;
+    display: block;
+    box-sizing: border-box;
+}
+
+.cast-title span:first-child {
+    flex: 1;
+}
+
+.cast-date {
+    white-space: nowrap;
+}
+
+.cast-role {
+    width: 100%;
+}
