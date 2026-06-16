@@ -13,12 +13,14 @@
     height: auto;
     display: block;
 }
+
 .movie-info {
     display: flex;
     flex-direction: column;
     gap: 8px;
     width: 100%;
 }
+
 .movie-title-row {
     display: flex;
     flex-direction: row;
@@ -48,6 +50,7 @@
     background-color: #fff;
     display: block;
 }
+
 .movie-original-title,
 .movie-tagline,
 .movie-overview {
@@ -75,8 +78,78 @@
     font-size: 0.95rem;
     min-height: 80px;
 }
+
+/* ── Section acteurs ── */
+.cast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.cast-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
+    align-items: center;
+    border: 2px solid #4a90d9;
+    padding: 8px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+    background-color: #fff;
+    transition: background-color 0.2s;
+}
+
+.cast-card:hover {
+    background-color: #eaf3ff;
+}
+
+.cast-avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid #ccc;
+}
+
+.cast-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cast-role {
+    display: block;
+    border: 1px solid #666;
+    padding: 4px 8px;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.cast-name {
+    display: block;
+    border: 1px solid #666;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    background-color: #f9f9f9;
+}
+
 @media (max-width: 600px) {
     .movie {
         grid-template-columns: 1fr;
+    }
+
+    .cast-card {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .cast-avatar {
+        width: 60px;
+        height: 60px;
     }
 }
