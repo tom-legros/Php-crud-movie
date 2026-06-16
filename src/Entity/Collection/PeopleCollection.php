@@ -18,6 +18,6 @@ SQL
         );
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Movie::class);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, People::class);
     }
 }

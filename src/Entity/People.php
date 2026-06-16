@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace Entity;
 
+use Entity\Exception\EntityNotFoundException;
 use Database\MyPdo;
 
 class People
 {
     private int $avatarId;
     private string $name;
-    private \DateTime $birthday;
-    private \DateTime $deathday;
+    private string $birthday;
+    private ?string $deathday;
     private string $biography;
     private string $placeOfBirth;
 
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     public function getAvatarId(): int
     {
@@ -37,22 +40,22 @@ class People
         $this->name = $name;
     }
 
-    public function getBirthday(): \DateTime
+    public function getBirthday(): string
     {
         return $this->birthday;
     }
 
-    public function setBirthday(\DateTime $birthday): void
+    public function setBirthday(string $birthday): void
     {
         $this->birthday = $birthday;
     }
 
-    public function getDeathday(): \DateTime
+    public function getDeathday(): ?string
     {
         return $this->deathday;
     }
 
-    public function setDeathday(\DateTime $deathday): void
+    public function setDeathday(?string $deathday): void
     {
         $this->deathday = $deathday;
     }
@@ -77,7 +80,30 @@ class People
         $this->biography = $biography;
     }
 
+    public static function findById(int $id): self
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+            SELECT id, avatarId, name, birthday, deathday, biography, placeOfBirth
+            FROM People
+            WHERE id = :id
+            SQL
+        );
+        $stmt->execute([':id' => $id]);
+        $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (false === $ligne) {
+            throw new EntityNotFoundException(
+                sprintf("L'id n'as pas éte trouve", $id)
+            );
+        }
+        $people = new self();
+        $people->id = $ligne['id'];
+        $people->name = $ligne['name'];
+        $people->birthday = $ligne['birthday'];
+        $people->deathday = $ligne['deathday'];
+        $people->biography = $ligne['biography'];
+        $people->placeOfBirth = $ligne['placeOfBirth'];
 
-
+        return $people;
+    }
 }
-
