@@ -10,14 +10,14 @@ class PeopleCollection{
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-            SELECT avatarId,name,birthday,deathday,biography,placeOfBirth
+            SELECT avatarId,name,birthday,deathday,biography,placeOfBirth,id
             FROM people
-            WHERE id IS NOT NULL
+            WHERE avatarId IS NOT NULL
             ORDER BY name ASC
 SQL
         );
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Movie::class);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, People::class);
     }
 }

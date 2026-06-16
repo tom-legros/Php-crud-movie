@@ -114,7 +114,7 @@ class Movie
     {
         $this->id = $id;
     }
-    public function getPosterById(int $posterId): Image
+    public function getPosterById(int $PosterId): Image
     {
         {$stmt = MyPdo::getInstance()->prepare(
                 <<<'SQL'
@@ -123,7 +123,7 @@ class Movie
         WHERE id = :id
         SQL
             );
-            $stmt->execute([':id' => $posterId]);
+            $stmt->execute([':id' => $PosterId]);
 
             $ligne = $stmt->fetch(\PDO::FETCH_ASSOC);
 
