@@ -4,41 +4,43 @@ declare(strict_types=1);
 
 use Entity\People;
 use Entity\Collection\PeopleCollection;
-use Html\AppWebPage;
+use Html\WebPage;
 
+if (!isset($_GET['peopleId']) || !ctype_digit($_GET['peopleId'])) {
+    header('location: /');
+    exit(302);
+}
 
-$webPage = new AppWebPage('Film - Nom Acteur');
+$peopleId = (int) $_GET['peopleId'];
+
+try {
+    $people = People::findById($peopleId);
+} catch (EntityNotFoundException) {
+    http_response_code(404);
+    exit;
+}
+
+$vignette = $people->getAvatarById($people->getAvatarId());
+$decodeVignette = base64_encode($vignette->getJpeg());
+
+$webPage = new WebPage();
+$webPage->setTitle("Films - {$people->getName()}");
+$webPage->appendCssUrl('/css/style.css');
+//$webPage->appendCssUrl('/css/actor.css');
 
 $Actors = (new PeopleCollection())->findAll();
 
-foreach ($Actors as $people) {
-    $id = $people->getid();
-    $name = $people->getName();
-    $placeOfBirth = $people->getPlaceOfBirth();
-    $birthday = $people->getBirthday();
-    $deathday = $people->getDeathday();
-    $biography = $people->getBiography();
-    $vignette = $people->getAvatarById($people->getAvatarId());
-    $decodeVignette = base64_encode($vignette->getJpeg());
-    $list .= "<p><img src=\"data:image/jpeg;base64,{$decodeVignette}\"><a href=\"actor.php?avatarId={$id}\">{$name}</a></p>";
-}
-//$content = <<<HTML
-//<div class="actor-info">
-//    <img src="">
-//    <div>nom, lieu, dates, bio</div>
-//</div>
-//
-//<div class="filmography">
-//    <a href="index.php?id=X">
-//        <img src="poster">
-//        <span>Titre</span>
-//        <span>Date</span>
-//        <span>Rôle</span>
-//    </a>
-//    ...
-//</div>
-//HTML;
+$content  = '<div class="header"><h1>'.$webPage->getTitle().'</h1></div>';
+$content .= '<div class="content">';
+$content .= '<div class="actor">';
+$content .= '<img class="actor-vignette" src="data:image/jpeg;base64,' . $decodeVignette . '" alt="' . $people->getName() . '">';
+$content .= '<div class="actor-info">';
+$content .= '<div class="actor-name">'.$people->getName().'</div>';
+$content .= '<div class="actor-place">'.$people->getPlaceOfBirth().'</div>';
+$content .= '<div class="actor-dates">'.$people->getBirthday().' - '.$people->getDeathday().'</div>';
+$content .= '<div class="actor-biography">'.$people->getBiography().'</div>';
+$content .= '</div></div>';
 
-$content = $list;
+
 $webPage->appendContent($content);
 echo $webPage->toHTML();
