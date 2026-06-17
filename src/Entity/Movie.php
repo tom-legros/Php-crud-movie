@@ -22,6 +22,21 @@ class Movie
     private string $title;
     private ?string $role = null;
 
+    private function __construct() {}
+    public static function create(int $id,int $posterId,string $originalLanguage,string $overview,string $releaseDate,int $runtime,?string $title,?string $role = null ): static
+    {
+        $movie = new self();
+        $movie->setMovieId($id);
+        $movie->setposterId($posterId);
+        $movie->setoriginalLanguage($originalLanguage);
+        $movie->setoverview($overview);
+        $movie->setreleaseDate($releaseDate);
+        $movie->setruntime($runtime);
+        $movie->settitle($title);
+        $movie->$role($role);
+        return $movie;
+    }
+
     public function getRole(): ?string
     {
         return $this->role;
@@ -31,9 +46,6 @@ class Movie
     {
         $this->role = $role;
     }
-
-
-    private function __construct() {}
 
 
     public function getOriginalLanguage(): string
@@ -175,5 +187,6 @@ class Movie
 
         return $movie;
     }
+
 }
 
