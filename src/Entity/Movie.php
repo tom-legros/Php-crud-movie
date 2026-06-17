@@ -36,6 +36,20 @@ class Movie
         $movie->$role($role);
         return $movie;
     }
+    public function delete(): static
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+        DELETE FROM Movie
+        WHERE id = :id
+        SQL
+        );
+        $stmt->execute([':id' => $this->id]);
+        $this->setMovieId(null);
+
+        return $this;
+    }
+
 
     public function getRole(): ?string
     {
