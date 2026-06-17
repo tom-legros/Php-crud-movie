@@ -13,7 +13,7 @@ class GenreCollection
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
             SELECT name,id
-            FROM Genre
+            FROM genre
             WHERE id IS NOT NULL
             ORDER BY id ASC
             SQL
