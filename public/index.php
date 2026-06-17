@@ -13,14 +13,15 @@ $genres = (new GenreCollection())->findAll();
 
 if (isset($_GET['genreId']) && ctype_digit($_GET['genreId'])) {
     $genreId = (int) $_GET['genreId'];
-    $movies = (new MovieCollection())->findByGenre($genreId);
+    $movies = (new GenreCollection())->findByGenre($genreId);
 } else {
     $genreId = null;
     $movies = (new MovieCollection())->findAll();
 }
 
-$list = '<div class="filter">';
-$list .= '<form method="get">';
+$webPage->appendToHead('<div class="filter">');
+
+$list = '<form method="get">';
 $list .= '<select name="genreId" onchange="this.form.submit()">';
 $list .= '<option value="">-- Tous les genres --</option>';
 foreach ($genres as $genre) {

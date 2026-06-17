@@ -351,3 +351,26 @@ a:hover {
         flex-direction:column;
     }
 }
+
+.filter {
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.filter select {
+    background-color: #101b2d;
+    color: #e8f1f5;
+    border: 2px solid #234a5e;
+    padding: 8px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+}
+
+.filter select:focus {
+    outline: none;
+    border-color: #2dd4bf;
+}
