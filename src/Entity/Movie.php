@@ -22,6 +22,72 @@ class Movie
     private string $title;
     private ?string $role = null;
 
+    private function __construct() {}
+    public static function create(int $id,string $originalLanguage,string $overview,string $releaseDate,int $runtime,?string $title ): static
+    {
+        $movie = new self();
+        $movie->setMovieId($id);
+        $movie->setoriginalLanguage($originalLanguage);
+        $movie->setoverview($overview);
+        $movie->setreleaseDate($releaseDate);
+        $movie->setruntime($runtime);
+        $movie->settitle($title);
+        return $movie;
+    }
+    public function delete(): static
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+        DELETE FROM movie
+        WHERE id = :id
+        SQL
+        );
+        $stmt->execute([':id' => $this->id]);
+        $this->setMovieId(null);
+
+        return $this;
+    }
+    protected function update(): static
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+        UPDATE movie
+        SET originalLanguage = :originalLanguage
+        SET overview = :overview
+        SET releaseDate = :releaseDate
+        SET runtime = :runtime
+        SET $title = :title
+        WHERE id = :id
+        SQL
+        );
+        $stmt->execute([':originalLanguage' => $this->originalLanguage,':overview' => $this->overview,':releaseDate' => $this->releaseDate,':runtime' => $this->runtime,':title' => $this->title,':id' => $this->id]);
+
+        return $this;
+    }
+    protected function insert(): static
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+        INSERT INTO movie (originalLanguage,overview,releaseDate,runtime,title)
+        VALUES (:originalLanguage,:overview,:releaseDate,:runtime,:title)
+        SQL
+        );
+        $stmt->execute([':originalLanguage' => $this->originalLanguage,':overview' => $this->overview,':releaseDate' => $this->releaseDate,':runtime' => $this->runtime,':title' => $this->title]);
+        $this->setMovieId((int) MyPdo::getInstance()->lastInsertId());
+
+        return $this;
+    }
+    public function save(): self
+    {
+        if (null === $this->getId()) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+        return $this;
+    }
+
+
     public function getRole(): ?string
     {
         return $this->role;
@@ -31,9 +97,6 @@ class Movie
     {
         $this->role = $role;
     }
-
-
-    private function __construct() {}
 
 
     public function getOriginalLanguage(): string
@@ -116,7 +179,7 @@ class Movie
         $this->title = $title;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -175,5 +238,6 @@ class Movie
 
         return $movie;
     }
+
 }
 
