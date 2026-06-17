@@ -77,8 +77,15 @@ class Movie
 
         return $this;
     }
-
-
+    public function save(): self
+    {
+        if (null === $this->getId()) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+        return $this;
+    }
 
 
     public function getRole(): ?string
@@ -172,7 +179,7 @@ class Movie
         $this->title = $title;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
