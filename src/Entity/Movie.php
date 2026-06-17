@@ -23,24 +23,22 @@ class Movie
     private ?string $role = null;
 
     private function __construct() {}
-    public static function create(int $id,int $posterId,string $originalLanguage,string $overview,string $releaseDate,int $runtime,?string $title,?string $role = null ): static
+    public static function create(int $id,string $originalLanguage,string $overview,string $releaseDate,int $runtime,?string $title ): static
     {
         $movie = new self();
         $movie->setMovieId($id);
-        $movie->setposterId($posterId);
         $movie->setoriginalLanguage($originalLanguage);
         $movie->setoverview($overview);
         $movie->setreleaseDate($releaseDate);
         $movie->setruntime($runtime);
         $movie->settitle($title);
-        $movie->$role($role);
         return $movie;
     }
     public function delete(): static
     {
         $stmt = MyPdo::getInstance()->prepare(
             <<<'SQL'
-        DELETE FROM Movie
+        DELETE FROM movie
         WHERE id = :id
         SQL
         );
@@ -49,6 +47,24 @@ class Movie
 
         return $this;
     }
+    protected function update(): static
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+        UPDATE movie
+        SET originalLanguage = :originalLanguage
+        SET overview = :overview
+        SET releaseDate = :releaseDate
+        SET runtime = :runtime
+        SET $title = :title
+        WHERE id = :id
+        SQL
+        );
+        $stmt->execute([':originalLanguage' => $this->originalLanguage,':overview' => $this->overview,':releaseDate' => $this->releaseDate,':runtime' => $this->runtime,':title' => $this->title,':id' => $this->id]);
+
+        return $this;
+    }
+
 
 
     public function getRole(): ?string
