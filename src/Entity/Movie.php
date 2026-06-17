@@ -64,6 +64,20 @@ class Movie
 
         return $this;
     }
+    protected function insert(): static
+    {
+        $stmt = MyPdo::getInstance()->prepare(
+            <<<'SQL'
+        INSERT INTO movie (originalLanguage,overview,releaseDate,runtime,title)
+        VALUES (:originalLanguage,:overview,:releaseDate,:runtime,:title)
+        SQL
+        );
+        $stmt->execute([':originalLanguage' => $this->originalLanguage,':overview' => $this->overview,':releaseDate' => $this->releaseDate,':runtime' => $this->runtime,':title' => $this->title]);
+        $this->setMovieId((int) MyPdo::getInstance()->lastInsertId());
+
+        return $this;
+    }
+
 
 
 
