@@ -4,3 +4,5 @@
 /.mypdo.ini
 tests/musiclite.sqlite
 tests/musiclite.sqlite_snapshot
+composer.phar
+composer_2.phar
